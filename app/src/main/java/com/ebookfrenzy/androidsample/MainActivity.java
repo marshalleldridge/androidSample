@@ -1,30 +1,31 @@
 package com.ebookfrenzy.androidsample;
 
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import androidx.appcompat.app.AppCompatActivity;
+import com.ebookfrenzy.androidsample.databinding.ActivityMainBinding;
 
 
 public class MainActivity extends AppCompatActivity {
 
+  private ActivityMainBinding binding;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    binding = ActivityMainBinding.inflate(getLayoutInflater());
+    View view = binding.getRoot();
+    setContentView(view);
   }
 
   public void convertCurrency(View view) {
-    EditText dollarText = findViewById(R.id.dollar_text);
-    TextView result = findViewById(R.id.convert_result);
 
-    if (!dollarText.getText().toString().isEmpty()) {
-      Float dollarValue = Float.valueOf(dollarText.getText().toString());
+    if (!binding.dollarText.toString().equals("")) {
+      Float dollarValue = Float.valueOf(binding.dollarText.getText().toString());
       Float euroValue = dollarValue * 0.85F;
-      result.setText(euroValue.toString());
+      binding.convertResult.setText(euroValue.toString());
     } else {
-      result.setText(R.string.no_value_string);
+      binding.convertResult.setText(R.string.no_value_string);
     }
   }
 }
